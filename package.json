@@ -1,0 +1,18 @@
+{
+  "name": "bleedflux",
+  "version": "1.0.0",
+  "description": "",
+  "license": "ISC",
+  "author": "strain#4897",
+  "type": "module",
+  "main": "dist/main.js",
+  "scripts": {
+    "dev": "tsc && node dist/main.js"
+  },
+  "dependencies": {
+    "@fluxerjs/core": "^1.4.0",
+    "@types/node": "^26.0.0",
+    "dotenv": "^17.4.2",
+    "typescript": "^6.0.3"
+  }
+}
