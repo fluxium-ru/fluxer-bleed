@@ -30,3 +30,10 @@ export async function getDeletedMessages(channelID: string) {
 
   return logs[channelID];
 }
+
+export async function clearSnipe(channelId: string) {
+  const raw = await readFile(FILE, "utf-8");
+  const logs: ChannelLogs = JSON.parse(raw);
+  delete logs[channelId];
+  await writeFile(FILE, JSON.stringify(logs, null, 2));
+}

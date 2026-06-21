@@ -16,9 +16,14 @@ bleed.events
     if (!bleed.user) return;
     if (message.author.id === bleed.user.id) return;
 
-    const commandName = message.content.slice(config.prefix.length).trim();
+    const args = message.content
+      .slice(config.prefix.length)
+      .trim()
+      .split(/\s+/);
+
+    const commandName = args.shift()?.toLowerCase();
     const command = commands.get(commandName);
-    await command.execute(message, []);
+    await command.execute(message, args);
   })
   .events.MessageDelete(async (message) => {
     if (!message.content) return;
