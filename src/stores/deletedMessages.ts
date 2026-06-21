@@ -3,16 +3,22 @@ const FILE = "data/messageLogs.json";
 
 interface ChannelLogs {
   [channelID: string]: {
-    recent: string;
+    content: string;
+    authorId: string;
   };
 }
 
-export async function addDeletedMessage(content: string, channelID: string) {
+export async function addDeletedMessage(
+  content: string,
+  authorId: string,
+  channelID: string,
+) {
   const raw = await readFile(FILE, "utf-8");
   const logs: ChannelLogs = JSON.parse(raw);
 
   logs[channelID] = {
-    recent: content,
+    content: content,
+    authorId: authorId,
   };
 
   await writeFile(FILE, JSON.stringify(logs, null, 2));

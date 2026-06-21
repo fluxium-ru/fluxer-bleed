@@ -11,16 +11,19 @@ const bleed = new Client({ intents: 0 });
 bleed.events
   .Ready(() => console.log("Bleed started!"))
   .events.MessageCreate(async (message) => {
+    // more jank
     if (!message.content.startsWith(config.prefix)) return;
     if (!bleed.user) return;
     if (message.author.id === bleed.user.id) return;
+
     const commandName = message.content.slice(config.prefix.length).trim();
     const command = commands.get(commandName);
     await command.execute(message, []);
   })
   .events.MessageDelete(async (message) => {
     if (!message.content) return;
-    addDeletedMessage(message.content, message.channelId);
+    if (!message.authorId) return;
+    addDeletedMessage(message.content, message.authorId, message.channelId);
   });
 
 async function start() {
