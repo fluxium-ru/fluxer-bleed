@@ -4,7 +4,8 @@ import { getDeletedMessages } from "../stores/deletedMessages.js";
 export default {
   name: "snipe",
   async execute(message: Message, args: string[]) {
-    const content = getDeletedMessages();
-    await message.reply(content.join("\n"));
+    const content = await getDeletedMessages(message.channelId);
+    if (!content) return;
+    await message.reply(content.recent);
   },
 };

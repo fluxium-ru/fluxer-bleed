@@ -12,13 +12,15 @@ bleed.events
   .Ready(() => console.log("Bleed started!"))
   .events.MessageCreate(async (message) => {
     if (!message.content.startsWith(config.prefix)) return;
+    if (!bleed.user) return;
+    if (message.author.id === bleed.user.id) return;
     const commandName = message.content.slice(config.prefix.length).trim();
     const command = commands.get(commandName);
     await command.execute(message, []);
   })
   .events.MessageDelete(async (message) => {
     if (!message.content) return;
-    addDeletedMessage(message.content);
+    addDeletedMessage(message.content, message.channelId);
   });
 
 async function start() {
