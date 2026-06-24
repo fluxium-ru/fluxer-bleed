@@ -20,3 +20,7 @@ export async function setAfk(userId: string, reason?: string) {
     reason: reason,
   };
 }
+
+export async function removeAfk(userId: string) {
+  delete afkUsers[userId];
+}

@@ -14,7 +14,8 @@ export default {
     );
     if (!args[0]) {
       await message.reply("Set AFK.");
+    } else {
+      await message.reply(`Set AFK for: ${args[0]}`);
     }
-    await message.reply(`Set AFK for: ${args[0]}`);
   },
 };
